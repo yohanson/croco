@@ -1,0 +1,17 @@
+#!/bin/bash
+DIR=$(dirname $0)
+BADWORDS=$DIR/croco-badwords.txt
+MORE=true
+while $MORE; do
+	word_accepted=false
+	while ! $word_accepted; do
+		word=$($DIR/croco)
+		zenity --question --window-icon=$DIR/croco.png --text="Ваше слово: $word" --cancel-label="Плохое слово" --ok-label="Беру"
+		[ $? -eq 0 ] && word_accepted=true
+		if ! $word_accepted; then
+		       echo "$word" >> $BADWORDS
+		fi
+       	done
+	zenity --question --text="Ещё одно слово?" --ok-label="Ещё" --cancel-label="Хватит" || MORE=false
+done
+
