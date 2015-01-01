@@ -4,7 +4,6 @@ DICT=$DIR/croco-dict.txt
 HISTORY=$DIR/croco-history.txt
 BADWORDS=$DIR/croco-badwords.txt
 
-#theword=$(grep -v -f $HISTORY -f $BADWORDS $DICT)
 theword=$(grep -v -f $HISTORY -f $BADWORDS $DICT | shuf -n1)
 echo "$theword" >> $HISTORY
 echo "$theword"
